@@ -1,58 +1,32 @@
-import { useState } from "react"
 import Home from "./pages/Home"
 import Notes from "./pages/Notes"
 import Users from "./pages/Users"
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 
 function App() {
-  const [page, setPage] = useState('home')
-
-  const toPage = page => event => {
-    event.preventDefault()
-    setPage(page)
-  }
-
-  const content = () => {
-    switch(page) {
-      case 'home':
-        return <Home />
-
-      case 'notes':
-        return <Notes />
-
-      case 'users':
-        return <Users />
-
-      default:
-        throw Error('Unknown page: ' + page)
-    }
-  }
 
   const padding = {
     padding: 5
   }
 
   return (
-    <div>
+    <Router>
       <div>
-        <a href="" onClick={toPage('home')} style={padding}>
-          home
-        </a>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/users">users</Link>
       </div>
 
-      <div>
-        <a href="" onClick={toPage('notes')} style={padding}>
-          notes
-        </a>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/users" element={<Users />} />
+      </Routes>
 
       <div>
-        <a href="" onClick={toPage('users')} style={padding}>
-          users
-        </a>
+        <i>Note app, Department of Computer Science 2023</i>
       </div>
-
-      {content()}
-    </div>
+    </Router>
   )
 }
 
