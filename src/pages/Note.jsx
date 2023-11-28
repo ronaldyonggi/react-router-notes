@@ -1,8 +1,5 @@
-import { useParams } from "react-router-dom";
 
-export default function Note({ notes }) {
-    const id = useParams().id
-    const note = notes.find(n => n.id === Number(id))
+export default function Note({ note }) {
     return (
         <div>
             <h2>{note.content}</h2>
